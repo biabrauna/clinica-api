@@ -1,0 +1,14 @@
+target/
+.env
+.env.local
+*.class
+*.jar
+*.war
+
+.idea/
+*.iml
+.vscode/
+.DS_Store
+
+.claude/
+docs/superpowers/
