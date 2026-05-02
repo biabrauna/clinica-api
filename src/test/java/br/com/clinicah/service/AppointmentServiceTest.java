@@ -130,12 +130,12 @@ class AppointmentServiceTest {
 
         // Não deve haver domingos
         result.forEach(day -> {
-            java.time.LocalDate date = java.time.LocalDate.parse(day.getDate());
+            java.time.LocalDate date = java.time.LocalDate.parse(day.date());
             assertThat(date.getDayOfWeek()).isNotEqualTo(java.time.DayOfWeek.SUNDAY);
         });
         // Cada dia deve ter slots entre 8h e 19h
         result.forEach(day ->
-                assertThat(day.getAvailableSlots()).allMatch(s -> s.matches("\\d{2}:00"))
+                assertThat(day.availableSlots()).allMatch(s -> s.matches("\\d{2}:00"))
         );
     }
 
@@ -157,9 +157,9 @@ class AppointmentServiceTest {
 
         // O dia 10/06/2027 não deve conter 09:00
         result.stream()
-                .filter(d -> d.getDate().equals("2027-06-10"))
+                .filter(d -> d.date().equals("2027-06-10"))
                 .findFirst()
-                .ifPresent(day -> assertThat(day.getAvailableSlots()).doesNotContain("09:00"));
+                .ifPresent(day -> assertThat(day.availableSlots()).doesNotContain("09:00"));
     }
 
     @Test
